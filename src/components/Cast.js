@@ -22,8 +22,7 @@ const Cast = () => {
     return (
         <ul>
             {cast && cast.map(({ id, name, original_name, profile_path, character }) => {
-                const path = profile_path ? `https://image.tmdb.org/t/p/w154/${profile_path}` : defaultPhoto;
-                console.log(path);
+                const path = profile_path ? `https://image.tmdb.org/t/p/w45/${profile_path}` : defaultPhoto;
                 return (
                     <li key={id}>
                         <img src={path} alt={name} />
