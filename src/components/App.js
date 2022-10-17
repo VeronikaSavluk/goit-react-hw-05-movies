@@ -1,9 +1,11 @@
+import { lazy } from 'react';
 import { Route, Routes, NavLink } from 'react-router-dom';
 import Home from 'pages/home/Home';
-import Movies from 'pages/movies/Movies';
-import MovieDetails from 'pages/moviedetails/MovieDetails';
-import Cast from './Cast';
-import Reviews from './Reviews';
+import Movies from '../pages/movies/Movies';
+import MovieDetails from '../pages/moviedetails/MovieDetails';
+
+const Cast = lazy(() => import('./Cast'));
+const Reviews = lazy(() => import('./Reviews'));
 
 const navItems = [
   { href: '/', text: 'Home' },
@@ -20,13 +22,13 @@ export const App = () => {
       </nav>
     </header>
     <Routes>
-      <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="movies" element={<Movies />} />
         <Route path="movies/:movieId" element={<MovieDetails />}>
           <Route path="cast" element={<Cast />} />
-           <Route path="reviews" element={<Reviews />} />
+          <Route path="reviews" element={<Reviews />} />
         </Route>
-      <Route path="*" element={<Home/>} />
+        <Route path="*" element={<Home />} />
     </Routes>
     </>
   );
