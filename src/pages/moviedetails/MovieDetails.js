@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../components/api';
 import defaultPoster from '../../noposter.jpg'
@@ -30,23 +30,25 @@ const MovieDetails = () => {
         <main>
             <Link to={backLinkHref}>Go back</Link>
             {details && details.map(({ poster_path, original_title, popularity, overview, genres: { name } }) => {
-                const path = poster_path ? `https://image.tmdb.org/t/p/w45/${poster_path}` : defaultPoster;
-                return (
-                    <div key={original_title}>
-                        <img src={path} alt={original_title} />
-                        <h2>{original_title}</h2>
-                        <p>User Score: {Math.ceil(popularity)}%</p>
-                        <h3>Overview</h3>
-                        <p>{overview}</p>
-                        <h3>Genres</h3>
-                        <p>{name}</p>
-                    </div>)
+            const path = poster_path ? `https://image.tmdb.org/t/p/w45/${poster_path}` : defaultPoster;
+            return (
+                <div key={original_title}>
+                    <img src={path} alt={original_title} />
+                    <h2>{original_title}</h2>
+                    <p>User Score: {Math.ceil(popularity)}%</p>
+                    <h3>Overview</h3>
+                    <p>{overview}</p>
+                    <h3>Genres</h3>
+                    <p>{name}</p>
+                </div>)
             })}
             <div>
                 <p>Additional information</p>
                 {additionalInfo.map(({ href, text }) => (<Link to={href} key={href} state={{from: location.state.from}}>{text}</Link>))}
             </div>
-            <Outlet />
+            <Suspense fallback={null}>
+                <Outlet />
+            </Suspense>
         </main>
     )
 };
