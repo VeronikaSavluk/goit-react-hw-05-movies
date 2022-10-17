@@ -49,7 +49,7 @@ function Movies() {
                     <Link key={id} to={`${id}`} state={{ from: location }}>
                         {title}
                     </Link>))}
-            </div>
+                </div>
         </main>
     );
 };
