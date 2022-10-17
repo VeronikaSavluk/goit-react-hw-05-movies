@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../components/api';
+import defaultPoster from '../../noposter.jpg'
 
 const additionalInfo = [
     {href: "cast", text: "Cast" },
@@ -28,11 +29,13 @@ const MovieDetails = () => {
     return (
         <main>
             <Link to={backLinkHref}>Go back</Link>
-            {details && details.map(({ original_title, popularity, overview, genres: { name } }) => {
+            {details && details.map(({ poster_path, original_title, popularity, overview, genres: { name } }) => {
+                const path = poster_path ? `https://image.tmdb.org/t/p/w45/${poster_path}` : defaultPoster;
                 return (
                     <div key={original_title}>
+                        <img src={path} alt={original_title} />
                         <h2>{original_title}</h2>
-                        <p>User Score:{popularity}%</p>
+                        <p>User Score: {Math.ceil(popularity)}%</p>
                         <h3>Overview</h3>
                         <p>{overview}</p>
                         <h3>Genres</h3>
@@ -41,7 +44,7 @@ const MovieDetails = () => {
             })}
             <div>
                 <p>Additional information</p>
-                {additionalInfo.map(({ id, href, text }) => (<Link to={href} key={href} state={{from: location.state.from}}>{text}</Link>))}
+                {additionalInfo.map(({ href, text }) => (<Link to={href} key={href} state={{from: location.state.from}}>{text}</Link>))}
             </div>
             <Outlet />
         </main>
