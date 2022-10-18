@@ -1,7 +1,8 @@
 import { useState, useEffect, Suspense } from 'react';
-import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
+import { Outlet, NavLink, Link, useParams, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../components/api';
-import defaultPoster from '../../noposter.jpg'
+import defaultPoster from '../../images/noposter.jpg'
+import { Container, MovieInfo, Poster, Name, Title, Text, InfoItem } from './MovieDetails.styled';
 
 const additionalInfo = [
     {href: "cast", text: "Cast" },
@@ -27,29 +28,36 @@ const MovieDetails = () => {
     }, [movieId]);
 
     return (
-        <main>
-            <Link to={backLinkHref}>Go back</Link>
-            {details && details.map(({ poster_path, original_title, popularity, overview, genres: { name } }) => {
-            const path = poster_path ? `https://image.tmdb.org/t/p/w45/${poster_path}` : defaultPoster;
+        <Container>
+            <NavLink to={backLinkHref}>Go back</NavLink>
+            {details && details.map(({ poster_path, original_title, popularity, overview, genres }) => {
+            const path = poster_path ? `https://image.tmdb.org/t/p/w154/${poster_path}` : defaultPoster;
             return (
-                <div key={original_title}>
-                    <img src={path} alt={original_title} />
-                    <h2>{original_title}</h2>
-                    <p>User Score: {Math.ceil(popularity)}%</p>
-                    <h3>Overview</h3>
-                    <p>{overview}</p>
-                    <h3>Genres</h3>
-                    <p>{name}</p>
-                </div>)
+                <MovieInfo key={original_title}>
+                    <Poster src={path} alt={original_title} />
+                    <div>
+                    <Name>{original_title}</Name>
+                    <Text>User Score: {Math.ceil(popularity)}%</Text>
+                    <Title>Overview</Title>
+                    <Text>{overview}</Text>
+                    <Title>Genres</Title>
+                    <Text>{genres.map(({ name }) => name).join(" ")}</Text>
+                    </div>
+                </MovieInfo>)
             })}
             <div>
-                <p>Additional information</p>
-                {additionalInfo.map(({ href, text }) => (<Link to={href} key={href} state={{from: location.state.from}}>{text}</Link>))}
+                <Text>Additional information</Text>
+                <ul>
+                    {additionalInfo.map(({ href, text }) => (
+                    <InfoItem key={href}>
+                        <Link to={href} state={{ from: location.state.from }}>{text}</Link>
+                    </InfoItem>))}
+                </ul>
             </div>
             <Suspense fallback={null}>
                 <Outlet />
             </Suspense>
-        </main>
+        </Container>
     )
 };
 
