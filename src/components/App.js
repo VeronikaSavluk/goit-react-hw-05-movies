@@ -4,8 +4,8 @@ import Home from 'pages/home/Home';
 import Movies from '../pages/movies/Movies';
 import MovieDetails from '../pages/moviedetails/MovieDetails';
 
-const Cast = lazy(() => import('./Cast'));
-const Reviews = lazy(() => import('./Reviews'));
+const Cast = lazy(() => import('./cast/Cast'));
+const Reviews = lazy(() => import('./reviews/Reviews'));
 
 const navItems = [
   { href: '/', text: 'Home' },
