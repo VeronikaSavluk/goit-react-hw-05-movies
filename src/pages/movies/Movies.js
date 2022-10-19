@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from '../../components/api';
-import { SearchForm, SearchInput, SearchBtn, SearchSvg, SearchItem } from './Movies.styled';
+import { SearchForm, SearchInput, SearchBtn, SearchSvg, SearchItem, Info } from './Movies.styled';
 import { Container } from '../moviedetails/MovieDetails.styled';
 
 function Movies() {
@@ -53,8 +53,8 @@ function Movies() {
             </SearchForm>
             <ul>
                 {movies && movies.map(({ id, title }) => (
-                <SearchItem key={id}><Link to={`${id}`} state={{ from: location }}>
-                    {title}</Link>
+                <SearchItem key={id}><Info to={`${id}`} state={{ from: location }}>
+                    {title}</Info>
                 </SearchItem>))}
             </ul>
         </Container>

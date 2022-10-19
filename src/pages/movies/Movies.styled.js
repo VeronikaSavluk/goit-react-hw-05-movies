@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from '../../styles';
 import { GoSearch } from 'react-icons/go';
+import { Link } from "react-router-dom";
 
 export const SearchForm = styled.form`
 margin: 10px 0;
@@ -39,4 +40,8 @@ rotate: 90deg;
 
 export const SearchItem = styled.li`
 margin-bottom: 4px;
+`;
+
+export const Info = styled(Link)`
+color: ${theme.colors.darkgreen};
 `;

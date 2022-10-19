@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchTraidingMovies } from 'components/api';
-import { Title, MoviesItem } from './Home.styled';
+import { Title, MoviesItem, Info } from './Home.styled';
 import { Container } from '../moviedetails/MovieDetails.styled';
 
 function Home() {
@@ -26,8 +26,8 @@ function Home() {
         <Container>
             <Title>Traiding today</Title>
             {movies && <ul>{movies.map(({ id, title }) => (
-                <MoviesItem key={id}><Link to={`movies/${id}`} state={{ from: location }}>
-                {title}</Link></MoviesItem>))}
+                <MoviesItem key={id}><Info to={`movies/${id}`} state={{ from: location }}>
+                {title}</Info></MoviesItem>))}
             </ul>}
             {error && <p>{error}</p>}
         </Container>
