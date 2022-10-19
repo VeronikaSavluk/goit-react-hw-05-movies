@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from '../../components/api';
+import { HiArrowUturnLeft } from "react-icons/hi2";
+import { GoSearch } from "react-icons/go";
 
+import { SearchForm, SearchInput, SearchBtn, SearchItem } from './Movies.styled';
+import { Container } from '../moviedetails/MovieDetails.styled';
 function Movies() {
     const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();
@@ -11,17 +15,20 @@ function Movies() {
     const handleSubmit = e => {
         e.preventDefault();
         const { elements: { search }, } = e.currentTarget;
-    const searchQuery = search.value.trim().toLowerCase();
-    if (!searchQuery) {
+        const searchQuery = search.value.trim().toLowerCase();
+
+        if (!searchQuery) {
         return;
         };
-    return setSearchParams(searchQuery !== "" ? {query: searchQuery} : {});
+
+        return setSearchParams(searchQuery !== "" ? { query: searchQuery } : {});
     };
 
     useEffect(() => {
         if (!query) {
             return;
         };
+
         async function fetchSearchAPI() {
             try {
                 const results = await fetchSearchMovies(query);
@@ -30,27 +37,28 @@ function Movies() {
                 console.log(error);
             }
         };
+
         fetchSearchAPI();
     }, [query]);
 
     return (
-        <main>
-            <Link to="/">Go back</Link>
-            <form onSubmit={handleSubmit}>
-                <input
+        <Container>
+            <Link to="/"><HiArrowUturnLeft size={12}/> Go back</Link>
+            <SearchForm onSubmit={handleSubmit}>
+                <SearchInput
                     name="search"
                     required
                     autoFocus
                 />
-                <button type="submit" />
-            </form>
-            <div>
+                <SearchBtn type="submit"><GoSearch /></SearchBtn>
+            </SearchForm>
+            <ul>
                 {movies && movies.map(({ id, title }) => (
-                    <Link key={id} to={`${id}`} state={{ from: location }}>
-                        {title}
-                    </Link>))}
-                </div>
-        </main>
+                <SearchItem><Link key={id} to={`${id}`} state={{ from: location }}>
+                    {title}</Link>
+                </SearchItem>))}
+            </ul>
+        </Container>
     );
 };
 
