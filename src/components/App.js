@@ -3,6 +3,7 @@ import { Route, Routes, NavLink } from 'react-router-dom';
 import Home from 'pages/home/Home';
 import Movies from '../pages/movies/Movies';
 import MovieDetails from '../pages/moviedetails/MovieDetails';
+import '../index.css';
 
 const Cast = lazy(() => import('./cast/Cast'));
 const Reviews = lazy(() => import('./reviews/Reviews'));
@@ -17,7 +18,8 @@ export const App = () => {
     <>
     <header>
       <nav>
-        {navItems.map(({ href, text }) => (<NavLink to={href} key={href}>{text}
+          {navItems.map(({ href, text }) => (<NavLink to={href} key={href}
+            exact activeClassName="active" style={{ marginRight: "15px" }}>{text}
         </NavLink>))}
       </nav>
     </header>
