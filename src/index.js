@@ -3,6 +3,7 @@ import { GlobalStyle, theme } from './styles';
 import ReactDOM from 'react-dom/client';
 import { App } from 'components/App';
 import 'modern-normalize';
+import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
