@@ -1,11 +1,10 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from '../../components/api';
-import { HiArrowUturnLeft } from "react-icons/hi2";
-import { GoSearch } from "react-icons/go";
-
-import { SearchForm, SearchInput, SearchBtn, SearchItem } from './Movies.styled';
+import { SearchForm, SearchInput, SearchBtn, SearchSvg, SearchItem } from './Movies.styled';
 import { Container } from '../moviedetails/MovieDetails.styled';
+
 function Movies() {
     const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();
@@ -37,29 +36,39 @@ function Movies() {
                 console.log(error);
             }
         };
-
         fetchSearchAPI();
     }, [query]);
 
     return (
         <Container>
-            <Link to="/"><HiArrowUturnLeft size={12}/> Go back</Link>
             <SearchForm onSubmit={handleSubmit}>
                 <SearchInput
                     name="search"
                     required
                     autoFocus
                 />
-                <SearchBtn type="submit"><GoSearch /></SearchBtn>
+                <SearchBtn type="submit">
+                    <SearchSvg size={18} />
+                </SearchBtn>
             </SearchForm>
             <ul>
                 {movies && movies.map(({ id, title }) => (
-                <SearchItem><Link key={id} to={`${id}`} state={{ from: location }}>
+                <SearchItem key={id}><Link to={`${id}`} state={{ from: location }}>
                     {title}</Link>
                 </SearchItem>))}
             </ul>
         </Container>
     );
+};
+
+Movies.propTypes = {
+    movies: PropTypes.arrayOf(
+        PropTypes.exact({
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+        })
+    ),
+    handleSubmit: PropTypes.func,
 };
 
 export default Movies;
