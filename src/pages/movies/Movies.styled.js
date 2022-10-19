@@ -8,6 +8,7 @@ margin: 10px 0;
 
 export const SearchInput = styled.input`
 font-size: ${theme.fontSizes.large};
+padding: 0;
 padding-left: 15px;
 text-aling: center;
 height: 35px;
