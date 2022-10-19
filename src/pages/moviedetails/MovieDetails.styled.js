@@ -10,12 +10,12 @@ display: flex;
 align-itms: flex-start;
 margin: 10px 0;
 padding-bottom: 10px;
-border-bottom: 1px solid ${theme.colors.grey};
+border-bottom: 2px solid ${theme.colors.grey};
 `;
 
 export const Additionion = styled.div`
 padding-bottom: 10px;
-border-bottom: 1px solid ${theme.colors.grey};
+border-bottom: 2px solid ${theme.colors.grey};
 `;
 
 export const Poster = styled.img`
