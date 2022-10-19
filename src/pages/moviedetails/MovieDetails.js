@@ -31,7 +31,7 @@ const MovieDetails = () => {
 
     return (
         <Container>
-            <NavLink to={backLinkHref}><HiArrowUturnLeft /> Go back</NavLink>
+            <NavLink to={backLinkHref}><HiArrowUturnLeft size={12}/> Go back</NavLink>
             {details && details.map(({ poster_path, original_title, popularity, overview, genres }) => {
             const path = poster_path ? `https://image.tmdb.org/t/p/w154/${poster_path}` : defaultPoster;
             return (
