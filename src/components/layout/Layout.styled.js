@@ -12,6 +12,7 @@ export const Header = styled.header`
 export const Link = styled(NavLink)`
 color: inherit;
 font-weight: 700;
+text-decoration: none;
 &.active {
     color: ${theme.colors.accent};
 }
