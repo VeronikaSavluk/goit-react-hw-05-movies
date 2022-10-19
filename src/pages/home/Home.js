@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchTraidingMovies } from 'components/api';
@@ -25,7 +26,7 @@ function Home() {
         <Container>
             <Title>Traiding today</Title>
             {movies && <ul>{movies.map(({ id, title }) => (
-                <MoviesItem><Link key={id} to={`movies/${id}`} state={{ from: location }}>
+                <MoviesItem key={id}><Link to={`movies/${id}`} state={{ from: location }}>
                 {title}</Link></MoviesItem>))}
             </ul>}
             {error && <p>{error}</p>}
@@ -33,5 +34,14 @@ function Home() {
 
     );
 };
+
+Home.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.exact({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+      })
+  )
+}
 
 export default Home;
