@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCast } from '../api';
@@ -23,7 +24,7 @@ const Cast = () => {
     return (
         <CastList>
             {cast && cast.map(({ id, name, original_name, profile_path, character }) => {
-                const path = profile_path ? `https://image.tmdb.org/t/p/w45/${profile_path}` : defaultPhoto;
+                const path = profile_path ? `https://image.tmdb.org/t/p/w185/${profile_path}` : defaultPhoto;
                 return (
                     <CastItem key={id}>
                         <Portret src={path} alt={name} />
@@ -34,6 +35,19 @@ const Cast = () => {
             })}
         </CastList>
     );
+};
+
+Cast.propTypes = {
+    cast: PropTypes.arrayOf(
+        PropTypes.exact({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            original_name: PropTypes.string.isRequired,
+            profile_path: PropTypes.string.isRequired,
+            character: PropTypes.string.isRequired,
+        })
+    ),
+    path: PropTypes.string,
 };
 
 export default Cast;
