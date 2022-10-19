@@ -10,8 +10,8 @@ margin-bottom: 20px;
 `;
 
 export const Portret = styled.img`
-width: 45px;
-height: 65px;
+width: 75px;
+height: 120px;
 `;
 
 export const CastTitle = styled.p`
