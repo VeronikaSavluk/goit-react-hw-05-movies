@@ -2,7 +2,9 @@ import { useState, useEffect, Suspense } from 'react';
 import { Outlet, NavLink, Link, useParams, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../components/api';
 import defaultPoster from '../../images/noposter.jpg'
-import { Container, MovieInfo, Poster, Name, Title, Text, InfoItem } from './MovieDetails.styled';
+import { HiArrowUturnLeft } from "react-icons/hi2";
+
+import { Container, MovieInfo, Additionion, Poster, Name, Title, Text, InfoItem } from './MovieDetails.styled';
 
 const additionalInfo = [
     {href: "cast", text: "Cast" },
@@ -29,7 +31,7 @@ const MovieDetails = () => {
 
     return (
         <Container>
-            <NavLink to={backLinkHref}>Go back</NavLink>
+            <NavLink to={backLinkHref}><HiArrowUturnLeft /> Go back</NavLink>
             {details && details.map(({ poster_path, original_title, popularity, overview, genres }) => {
             const path = poster_path ? `https://image.tmdb.org/t/p/w154/${poster_path}` : defaultPoster;
             return (
@@ -45,7 +47,7 @@ const MovieDetails = () => {
                     </div>
                 </MovieInfo>)
             })}
-            <div>
+            <Additionion>
                 <Text>Additional information</Text>
                 <ul>
                     {additionalInfo.map(({ href, text }) => (
@@ -53,7 +55,7 @@ const MovieDetails = () => {
                         <Link to={href} state={{ from: location.state.from }}>{text}</Link>
                     </InfoItem>))}
                 </ul>
-            </div>
+            </Additionion>
             <Suspense fallback={null}>
                 <Outlet />
             </Suspense>
