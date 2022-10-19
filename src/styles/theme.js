@@ -4,7 +4,7 @@ export const theme = Object.freeze({
     white: '#fff',
     blue: '#24478f',
     light: '#f2f2f2',
-    dark: '#212121',
+    grey: '#A9A9A9',
     primary: '#49a09d',
     mainBackground: ['linear-gradient(to top, #abbaab, #fff)'],
   },
