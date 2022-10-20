@@ -52,7 +52,7 @@ const MovieDetails = () => {
                 <ul>
                     {additionalInfo.map(({ href, text }) => (
                     <InfoItem key={href}>
-                        <Link to={href} state={{ from: location.state.from }}>{text}</Link>
+                        <Link to={href} state={{ from: backLinkHref }}>{text}</Link>
                     </InfoItem>))}
                 </ul>
             </Additionion>
