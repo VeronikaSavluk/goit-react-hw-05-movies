@@ -4,15 +4,15 @@ import { GoSearch } from 'react-icons/go';
 import { Link } from "react-router-dom";
 
 export const SearchForm = styled.form`
+display: flex;
 margin: 10px 0;
 `;
 
 export const SearchInput = styled.input`
 font-size: ${theme.fontSizes.large};
-padding: 0;
+padding: 4px;
 padding-left: 15px;
 text-aling: center;
-height: 35px;
 border: 2px solid ${theme.colors.green};
 border-right-style: hidden;
 background: inherit;
@@ -25,10 +25,10 @@ border-bottom-left-radius: 15px;
 `;
 
 export const SearchBtn = styled.button`
-width: 60px;
-height: 35px;
+width: 40px;
 text-align: center;
 border: 2px solid ${theme.colors.green};
+border-left-style: hidden;
 box-shadow: ${theme.shadows.small};
 border-top-right-radius: 15px;
 border-bottom-right-radius: 15px;
