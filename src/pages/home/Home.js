@@ -24,7 +24,7 @@ function Home() {
 
     return (
         <Container>
-            <Title>Traiding today</Title>
+            <Title>Trending today</Title>
             {movies && <ul>{movies.map(({ id, title }) => (
                 <MoviesItem key={id}><Info to={`movies/${id}`} state={{ from: location }}>
                 {title}</Info></MoviesItem>))}
